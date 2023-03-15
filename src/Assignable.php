@@ -34,6 +34,10 @@ trait Assignable {
             $child_column => $model->getKey()
         ]);
 
+        if(class_exists('\App\Events\ModelAssigned')) {
+            event(new \App\Events\ModelAssigned($this, $model));
+        }
+
         return true;
     }
 }
